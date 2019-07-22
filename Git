@@ -10,6 +10,7 @@ git stash list --> lists all stashes
 git stash drop stash@{0}
 git stash branch
 git stash show -->show the summary of stash, view the diff
+git stash -u -->stashes even untracked files
 
 git log to see all the git commit messages of that branch
 

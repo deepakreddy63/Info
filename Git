@@ -10,7 +10,6 @@ git stash list --> lists all stashes
 git stash drop stash@{0}
 git stash branch
 git stash show -->show the summary of stash, view the diff
-git stash -u -->stashes even untracked files
 
 git log to see all the git commit messages of that branch
 
@@ -18,7 +17,7 @@ git branch -a shows all remote and local branches
 git checkout branch_name
 
 git checkout commit-ID to move to that commit of the branch
-git branch -b <name> to create a new branch
+git checkout -b <name> to create a new branch
 
 git reset commit-ID does mixed reset where the files are unstaged and moved to working tree
 git reset --hard commit-ID does hard reset where the modifications are permenantly removed and reset to commit-ID state
@@ -49,3 +48,8 @@ git tag -a -f vx.y commit-ID -->retagging with same tag for different commit wit
 git checkout tag
 git tag -d -->to delete a tag
 
+git rebase master -- Done once checkout feature branch. The branch point of feature branch starts with latest commit of master-->rebased
+git merge master -- Merges the latest master in to feature branch -- three way merge if master also has latest commits.
+
+git clean -fxd -- f for force, x for ignored files, d for directories
+cleans all the untracked files (files before git add) from the git repository

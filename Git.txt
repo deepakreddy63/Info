@@ -58,3 +58,24 @@ git diff branch1..branch2 -- Gives the difference of heads/tips of both branches
 git diff --name-only branch1..branch2 -- Gives the names of files only changed between the head of both branches
 git diff branch1...branch2 -- Gives the difference between right branch head (branch2) and common ancestor
  
+# Configure Git for the first time
+git config --global user.name "Your name"
+git config --global user.email "Your email"
+
+# git push situations
+# My code is ready to be pushed -- if you have code ready to be pushed to the remote repository.
+cd existing-project
+git init
+git add --all
+git commit -m "Initial Commit"
+git remote add origin https://gitrepo url # Here we are setting remote repo as origin
+git push -u origin master
+
+# My code is already tracked by Git -- if your code is already tracked by git, then set the remote repository as your "origin" to push to.
+cd existing-project
+git remote set-url origin http://gitrepo url
+git push -u origin --all
+git push origin --tags
+
+
+

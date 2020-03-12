@@ -77,5 +77,14 @@ git remote set-url origin http://gitrepo url
 git push -u origin --all
 git push origin --tags
 
+# adding git submodules a.k.a copying one git repo inside other git repo
+git submodule add <url> "Submodule Name"
+
+# Deleting/modifying the submodule
+# option1: To manually remove entries in .gitmodules and .git/config files and then remove folders and commit
+# option2: 
+git submodule deinit <path_to_submodule>
+git rm <path_to_submodule>
+
 
 

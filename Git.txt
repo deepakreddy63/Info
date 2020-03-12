@@ -1,0 +1,60 @@
+Git has three trees: 
+Working tree --  where it tracks modifications -- git status
+Staging tree - where we add these changes -- git add
+commit tree - where we commit our changes -- git commit
+
+git stash used to store the changes before we do git pull and then git pop again to get back them.
+git stash apply stash@{0} -->applies the saved stash of index 0 to current branch and retains it
+git stash pop --> applies and removes the item from stash
+git stash list --> lists all stashes
+git stash drop stash@{0}
+git stash branch
+git stash show -->show the summary of stash, view the diff
+
+git log to see all the git commit messages of that branch
+
+git branch -a shows all remote and local branches 
+git checkout branch_name
+
+git checkout commit-ID to move to that commit of the branch
+git checkout -b <name> to create a new branch
+
+git reset commit-ID does mixed reset where the files are unstaged and moved to working tree
+git reset --hard commit-ID does hard reset where the modifications are permenantly removed and reset to commit-ID state
+dangerous: Can get back with git reflog if done before git garbage removel(once in 30 days)
+
+git diff -- file to see the changes of the file from last commit
+git diff commit-ID --file
+git diff --name-only commit-ID1 commit-ID2 shows files changed in between
+
+git merge <branch> Merges the specifed branch with the current branch
+
+git fetch Fetches the latest commits of the remote branch of current local branch
+git pull  is same as git fetch and then git merge of current local branch
+
+git rebase <base> Merges the start point after branching of current branch to the HEAD of the base
+git bisect used to detect bug at which commit (binary search)
+
+git fetch -p --> p is for prune. This updates the remote branch database in local repository. I got this when I observed deleted remote branches in site which existed in my local repo.
+
+git log --grep="" helps to search the commit message as per string
+
+git tag -->tags are ref's that point to specific points in Git history. Tagging is generally used to capture a point in history that is used for a marked version release. its like branching with no further commit history 
+
+git tag -->lists all tags in repo
+git tag -a vx.y.z -m "Message" --> creates a annotated tag with specified message --recommended
+git tag vx.y -lw -->creates light weight tag position for commit of HEAD is referencing to 
+git tag -a -f vx.y commit-ID -->retagging with same tag for different commit with force option
+git checkout tag
+git tag -d -->to delete a tag
+
+git rebase master -- Done once checkout feature branch. The branch point of feature branch starts with latest commit of master-->rebased
+git merge master -- Merges the latest master in to feature branch -- three way merge if master also has latest commits.
+
+git clean -fxd -- f for force, x for ignored files, d for directories
+cleans all the untracked files (files before git add) from the git repository
+
+git diff branch1..branch2 -- Gives the difference of heads/tips of both branches
+git diff --name-only branch1..branch2 -- Gives the names of files only changed between the head of both branches
+git diff branch1...branch2 -- Gives the difference between right branch head (branch2) and common ancestor
+ 

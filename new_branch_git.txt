@@ -1,0 +1,25 @@
+git config user.name "Deepak Reddy"
+git config user.email "deepakreddy63@gmail.com"
+git checkout --orphan test_orphan
+git rm -rf .
+git commit --allow-empty -m "root commit" --To create empty file commit
+git branch -a
+git commit --amend --author="Deepak Reddy <deepakreddy63@gmail.com>" --To amend author for last commit
+git rebase -i -p commit --Interactive editor opens where we can give options like pick, edit particular commits
+# Script to change the Author info
+git filter-branch --env-filter '
+WRONG_EMAIL="wrong@example.com"
+NEW_NAME="New Name Value"
+NEW_EMAIL="correct@example.com"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$NEW_NAME"
+    export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$NEW_NAME"
+    export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+fi
+

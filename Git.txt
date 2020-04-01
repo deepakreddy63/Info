@@ -21,6 +21,7 @@ git checkout -b <name> to create a new branch
 
 git reset commit-ID does mixed reset where the files are unstaged and moved to working tree
 git reset --hard commit-ID does hard reset where the modifications are permenantly removed and reset to commit-ID state
+ex: git reset --hard HEAD~1 --reset to last commit
 dangerous: Can get back with git reflog if done before git garbage removel(once in 30 days)
 
 git diff -- file to see the changes of the file from last commit
@@ -86,5 +87,32 @@ git submodule add <url> "Submodule Name"
 git submodule deinit <path_to_submodule>
 git rm <path_to_submodule>
 
+# To add new branch with no old commits and modify a commit incase of change of Author
+git config user.name "Deepak Reddy"
+git config user.email "deepakreddy63@gmail.com"
+git checkout --orphan test_orphan
+git rm -rf .
+git commit --allow-empty -m "root commit" --To create empty file commit
+git branch -a
+git commit --amend --author="Deepak Reddy <deepakreddy63@gmail.com>" --To amend author for last commit
+git rebase -i -p commit --Interactive editor opens where we can give options like pick, edit particular commits
+# Script to change the Author info
+git filter-branch --env-filter '
+WRONG_EMAIL="wrong@example.com"
+NEW_NAME="New Name Value"
+NEW_EMAIL="correct@example.com"
 
+if [ "$GIT_COMMITTER_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$NEW_NAME"
+    export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$NEW_NAME"
+    export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+fi
+git push -f origin branch --To force commit changes in remote repo
+git pull origin test_orphan  --allow-unrelated-histories --if .git gets corrupted
+git branch --set-upstream-to=origin/test_orphan test_orphan --to link remote branch to local branch
 

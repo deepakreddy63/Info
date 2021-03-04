@@ -3,14 +3,20 @@ Working tree --  where it tracks modifications -- git status
 Staging tree - where we add these changes -- git add
 commit tree - where we commit our changes -- git commit
 
-git stash used to store the changes before we do git pull and then git pop again to get back them.
-git stash apply stash@{0} -->applies the saved stash of index 0 to current branch and retains it
-git stash pop --> applies and removes the item from stash
-git stash list --> lists all stashes
-git stash drop stash@{0}
-git stash branch
-git stash show -->show the summary of stash, view the diff
-
+#git stash used to store the changes before we do git pull and then git pop again to get back them.
+git stash (default->saves tracked files with message WIP on branch_name with commitID)
+git stash -u (includes untracked files, -a->includes all files including ignored)
+git stash save "message" (saves with message to easily identify the stash)
+git stash list
+git stash pop (applies the last saved stash by removing from stash list)
+git stash apply (applies last stash without removing)
+git stash pop stash@{2} (we can choose which stash to pop by passing ID)
+git stash show (shows the stashed files, -p shows the full diff)
+git stash drop stash@{1} (To delete stash with index 1)
+git stash clear (To remove all stashes)
+git stash -p (partial stash -->interactive)
+git stash branch_name stash@{1} (creates a new branch with branch_name and pops that stash, incase the changes diverge from stashed changes)
+git log --oneline --graph stash@{0}
 git log to see all the git commit messages of that branch
 
 git branch -a shows all remote and local branches 
@@ -115,4 +121,30 @@ fi
 git push -f origin branch --To force commit changes in remote repo
 git pull origin test_orphan  --allow-unrelated-histories --if .git gets corrupted
 git branch --set-upstream-to=origin/test_orphan test_orphan --to link remote branch to local branch
+
+# To see git branch/Head on the command line
+source /usr/lib/git-core/git-sh-prompt 
+export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h \w\[\033[0;32m\]$(__git_ps1)\n\$\[\033[0m\] '
+
+# Add this line for github automatic login password
+machine github.p4avd.fcagroup.com login tid password pwd
+
+#If too many red files or changes because of interruption
+git clean -f -d
+
+#To take it back to origin
+git fetch origin && git reset --hard origin/master && git clean -f -d
+
+# To forcefully switch branch
+git checkout branch -f
+
+# procedure to push
+git config --list
+git status
+git branch -n "US#-name"
+git add .
+git commit
+git push origin branch-name
+
+git log --oneline --graph -->to see git log in graph format
 
